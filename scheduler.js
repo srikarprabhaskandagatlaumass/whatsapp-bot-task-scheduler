@@ -21,18 +21,6 @@ function saveState(state) {
   fs.writeFileSync('state.json', JSON.stringify(state, null, 2));
 }
 
-function sendMessage(person, task) {
-  const message = `Yoo ${person.name}!, clean the ${task} today meh!`;
-  client.messages
-    .create({
-      body: message,
-      from: process.env.TWILIO_WHATSAPP_NUMBER,
-      to: person.phone
-    })
-    .then(msg => console.log(`Sent ${task} reminder to ${person.name}: ${msg.sid}`))
-    .catch(err => console.error(err));
-}
-
 function sendCustomMessage(person, message) {
   client.messages
     .create({
@@ -100,7 +88,7 @@ function enhancedSendReminders(day) {
 
 // Schedule tasks
 function scheduleReminders() {
-  cron.schedule('* * * * *', () => { // (Friday 10:00 AM)
+  cron.schedule('0 10 * * 5', () => { // (Friday 10:00 AM)
     enhancedSendReminders('tomorrow');
   });
 
@@ -166,7 +154,7 @@ function startBotServer() {
 
   scheduleReminders();
 
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 7777;
   app.listen(PORT, () => console.log(`Server running on ${PORT}`));
 }
 
