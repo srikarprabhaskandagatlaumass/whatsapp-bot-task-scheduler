@@ -1,4 +1,9 @@
 {
-  "kitchenIndex": 0,
-  "bathroomIndex": 1
+  "kitchenIndex": 2,
+  "bathroomIndex": 2,
+  "bathroomWeek": 0,
+  "done": {
+    "kitchen": true,
+    "bathroom": true
+  }
 }
